@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import com.jdc.jpql.entity.Category;
 
@@ -42,6 +44,20 @@ public class GettingStartTest extends AbstractTest{
 		em.getTransaction().commit();
 		
 		assertEquals(1, count);
+	}
+	
+	@ParameterizedTest
+	@CsvSource({
+		"f,2",
+		"e,1"
+	})
+	void search_category_by_name_like(String name, int count) {
+		var query = em.createNamedQuery("Category.findByNameLike", Category.class);
+		
+		query.setParameter(1, name.toLowerCase().concat("%"));
+		var list = query.getResultList();
+		
+		assertEquals(count, list.size());
 	}
 
 }
