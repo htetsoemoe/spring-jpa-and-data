@@ -46,10 +46,11 @@ public class GettingStartTest extends AbstractTest{
 		assertEquals(1, count);
 	}
 	
+	//@Disabled
 	@ParameterizedTest
 	@CsvSource({
-		"f,2",
-		"e,1"
+		"f,4",
+		"e,2"
 	})
 	void search_category_by_name_like(String name, int count) {
 		var query = em.createNamedQuery("Category.findByNameLike", Category.class);

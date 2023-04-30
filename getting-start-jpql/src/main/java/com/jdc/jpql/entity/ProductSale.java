@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product_sale")
-public class ProductSale implements Serializable{
+public class ProductSale implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +29,12 @@ public class ProductSale implements Serializable{
 	@ManyToOne
 	@MapsId("saleId")
 	private Sale sale;
+
+	private int quantity;
+	
+	public ProductSale() {
+		id = new ProductSalePK();
+	}
 
 	public ProductSalePK getId() {
 		return id;
@@ -54,6 +60,14 @@ public class ProductSale implements Serializable{
 	public void setSale(Sale sale) {
 		this.sale = sale;
 		this.id.setSaleId(sale.getId());
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 }
