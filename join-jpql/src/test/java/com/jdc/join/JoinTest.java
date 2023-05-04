@@ -48,6 +48,30 @@ public class JoinTest {
 		System.out.println(data.getName());
 	}
 	
+	@Order(4)
+	@Test
+	void test_to_one_jpql_join() {
+		var jpql = "select p from Product p join p.category c where c.name = :name";
+		
+		var query = em.createQuery(jpql, Product.class);
+		query.setParameter("name", "Foods");
+		
+		var list = query.getResultList();
+		list.stream().map(Product::getName).forEach(System.out::println);
+	}
+	
+	@Order(5)
+	@Test
+	void test_to_many_jpql_join() {
+		var jpql = "select p from Product p join p.supplier s where s.name = :supplier";
+		
+		var query = em.createQuery(jpql, Product.class);
+		query.setParameter("supplier", "196 store");
+		
+		var list = query.getResultList();
+		list.stream().map(Product::getName).forEach(System.out::println);
+	}
+	
 	@BeforeEach
 	void init() {
 		emf = Persistence.createEntityManagerFactory("join-jpql");
