@@ -7,6 +7,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Product implements Serializable {
 	@Column(nullable = false)
 	private String name;
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Category category;
 	private int price;
 	private boolean available;// update 
