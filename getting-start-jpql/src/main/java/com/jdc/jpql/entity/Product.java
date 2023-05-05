@@ -7,14 +7,16 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "product")
@@ -36,10 +38,22 @@ public class Product implements Serializable {
 	private boolean available;// update 
 	private String image; // add new variable
 	
+	@ManyToMany
+	@JoinTable(name = "product_supply", joinColumns = @JoinColumn(name = "product_id"))
+	private List<Supplier> supplier;
+	
 	@Column(name = "color")
 	@CollectionTable(name = "product_colors", joinColumns = @JoinColumn(name = "product"))
 	@ElementCollection
 	private List<String> colors; // add new variable
+	
+	public List<Supplier> getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(List<Supplier> supplier) {
+		this.supplier = supplier;
+	}
 
 	public int getId() {
 		return id;

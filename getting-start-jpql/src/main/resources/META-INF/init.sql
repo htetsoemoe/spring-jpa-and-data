@@ -76,6 +76,11 @@ insert into sale (sale_date, customer_id) values ('2022-07-08', 3);
 insert into sale (sale_date, customer_id) values ('2022-07-08', 4);
 insert into sale (sale_date, customer_id) values ('2022-07-08', 6);
 
+-- Suppliers
+insert into supplier (name, phone, email) values ('196 Store', '0911889900', 'store196@gmail.com');
+insert into supplier (name, phone, email) values ('Star Shop', '0911889911', 'starshop@gmail.com');
+insert into supplier (name, phone, email) values ('Moon Star', '0911889922', 'moonstar@gmail.com');
+
 -- ProductSale
 insert into product_sale (sale_id, product_id, quantity) values (1, 1, 2);
 insert into product_sale (sale_id, product_id, quantity) values (1, 2, 1);
