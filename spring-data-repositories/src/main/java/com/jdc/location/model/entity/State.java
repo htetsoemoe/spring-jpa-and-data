@@ -95,11 +95,11 @@ public class State implements Serializable{
 		this.capital = capital;
 	}
 
-	public int getPorpulation() {
+	public int getPopulation() {
 		return population;
 	}
 
-	public void setPorpulation(int population) {
+	public void setPopulation(int population) {
 		this.population = population;
 	}
 
