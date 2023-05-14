@@ -15,12 +15,14 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan(basePackages = "com.jdc.location.model")
 @EnableJpaRepositories(basePackages = "com.jdc.location.model.repo")
+@EnableTransactionManagement
 public class JpaConfiguration {
 
 	@Bean

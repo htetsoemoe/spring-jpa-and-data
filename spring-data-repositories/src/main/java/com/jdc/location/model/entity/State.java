@@ -25,28 +25,28 @@ public class State implements Serializable{
 	private Type type;
 	private String region;
 	private String capital;
-	private int porpulation;
+	private int population;
 
 	public State() {
 	}
 
-	public State(int id, String name, Type type, String region, String capital, int porpulation) {
+	public State(int id, String name, Type type, String region, String capital, int population) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.region = region;
 		this.capital = capital;
-		this.porpulation = porpulation;
+		this.population = population;
 	}
 
-	public State(String name, Type type, String region, String capital, int porpulation) {
+	public State(String name, Type type, String region, String capital, int population) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.region = region;
 		this.capital = capital;
-		this.porpulation = porpulation;
+		this.population = population;
 	}
 
 	public enum Type {
@@ -96,11 +96,11 @@ public class State implements Serializable{
 	}
 
 	public int getPorpulation() {
-		return porpulation;
+		return population;
 	}
 
-	public void setPorpulation(int porpulation) {
-		this.porpulation = porpulation;
+	public void setPorpulation(int population) {
+		this.population = population;
 	}
 
 	public Type getType() {
