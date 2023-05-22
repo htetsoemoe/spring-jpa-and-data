@@ -48,12 +48,22 @@ public class DistrictRepoTest {
 		assertThat(lists, hasSize(size));
 	}
 	
+	@Disabled
 	@ParameterizedTest
 	@CsvSource({
 		"13,mo,3"
 	})
 	void test_find_by_named_query(int stateId, String name, int size) {
 		var lists = repo.findWithIdAndNameQuery(stateId, name.concat("%"));
+		assertThat(lists, hasSize(size));
+	}
+	
+	@ParameterizedTest
+	@CsvSource({
+		"13,mo,3"
+	})
+	void test_find_by_query_annotation(int stateId, String name, int size) {
+		var lists = repo.findWithQueryAnnotation(stateId, name.concat("%"));
 		assertThat(lists, hasSize(size));
 	}
 

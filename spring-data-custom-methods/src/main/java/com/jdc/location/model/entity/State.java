@@ -11,9 +11,16 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "state")
+@NamedNativeQuery(name = "State.findWithNativeSql",
+				query = "select * from state where type = :type",
+				resultClass = State.class
+)
 public class State implements Serializable{
 
 	private static final long serialVersionUID = 1L;
