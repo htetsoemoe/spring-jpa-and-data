@@ -3,8 +3,12 @@ package com.jdc.location.model.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import com.jdc.location.model.record.StateWithDistrictCountRecord;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ColumnResult;
+import jakarta.persistence.ConstructorResult;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,10 +17,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SqlResultSetMapping;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "state")
+@SqlResultSetMapping(
+		name = "stateWithDistrictCountRecord",
+		classes = @ConstructorResult(
+			targetClass = StateWithDistrictCountRecord.class,
+			columns = {
+				@ColumnResult(name = "id"),
+				@ColumnResult(name = "name"),
+				@ColumnResult(name = "districtCount", type = Integer.class)
+			}
+		)	
+	)
+	@NamedNativeQuery(
+		name = "State.natvieWithCountById",
+		resultSetMapping = "stateWithDistrictCountRecord",
+		query = """
+			select s.id id, s.name name, 
+			(select count(1) from district d where d.state_id = s.id) as districtCount 
+			from state s where s.id = ?"""
+	)
 public class State implements Serializable{
 
 	private static final long serialVersionUID = 1L;
