@@ -21,8 +21,10 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan(basePackages = "com.jdc.location.model")
-@EnableJpaRepositories(basePackages = "com.jdc.location.model.repo")
 @EnableTransactionManagement
+@EnableJpaRepositories(
+		basePackages = "com.jdc.location.model.repo",
+		repositoryImplementationPostfix = "Default")
 public class JpaConfiguration {
 
 	@Bean
@@ -54,5 +56,3 @@ public class JpaConfiguration {
 		return prop;
 	}
 }
-
-
