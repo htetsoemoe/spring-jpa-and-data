@@ -17,6 +17,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.jdc.location.model.repo.custom.BaseRepositoryDefault;
+
 import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
@@ -24,7 +26,9 @@ import jakarta.persistence.EntityManagerFactory;
 @EnableTransactionManagement
 @EnableJpaRepositories(
 		basePackages = "com.jdc.location.model.repo",
-		repositoryImplementationPostfix = "Default")
+		repositoryImplementationPostfix = "Default",
+		repositoryBaseClass = BaseRepositoryDefault.class
+)
 public class JpaConfiguration {
 
 	@Bean
