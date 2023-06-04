@@ -16,10 +16,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "state")
-public class State implements Serializable{
+public class State implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -31,15 +31,16 @@ public class State implements Serializable{
 	private String region;
 	private String capital;
 	private int population;
-	
-	@OneToMany(
-			mappedBy = "state",
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-			orphanRemoval = true
-	)
+
+	@OneToMany(mappedBy = "state", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
 	private List<District> districts;
 
 	public State() {
+	}
+
+	public State(String region) {
+		super();
+		this.region = region;
 	}
 
 	public State(int id, String name, Type type, String region, String capital, int population) {
@@ -132,4 +133,3 @@ public class State implements Serializable{
 	}
 
 }
-
