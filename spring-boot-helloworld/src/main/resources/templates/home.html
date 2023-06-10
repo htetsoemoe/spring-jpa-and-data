@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Hello World</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript" th:href="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+	<div class="container mt-4">
+		<h1 class="mb-5">States and Divisions in Myanmar</h1>
+		
+		<div class="row row-cols-3">
+			<div class="col" th:each="state : ${list}">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${state.name}"></h5>
+						<p class="card-text" th:text="${state.capital}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>
