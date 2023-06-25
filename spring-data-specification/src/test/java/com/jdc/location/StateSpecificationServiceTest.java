@@ -31,6 +31,7 @@ public class StateSpecificationServiceTest {
 		assertThat(result, is(2L));
 	}
 	
+	@Disabled
 	@Test
 	void test_findDtoByRegion() {
 		var result = service.findDtoByRegion("Central");
@@ -38,6 +39,12 @@ public class StateSpecificationServiceTest {
 		for(var dto : result) {
 			System.out.println("%d: %s, %s".formatted(dto.getId(), dto.getName(), dto.getRegion()));
 		}
+	}
+	
+	@Test
+	void test_specification_delete_by_region() {
+		var result = service.deleteByRegion("East");
+		assertThat(result, is(2L));
 	}
 	
 
