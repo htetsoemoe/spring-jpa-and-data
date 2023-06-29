@@ -13,6 +13,8 @@ import com.jdc.location.entity.State;
 import com.jdc.location.repo.DistrictRepo;
 import com.jdc.location.repo.StateRepo;
 
+import jakarta.persistence.criteria.JoinType;
+
 @Service
 public class StateSpecificationService {
 
@@ -59,5 +61,19 @@ public class StateSpecificationService {
 			
 		return districtRepo.delete(specification);
 	}
+	
+	// find State using District name like
+	public List<State> findByDistrictNameLike(String name) {
+		Specification<State> spec = (root, query, criteriaBuilder) -> {
+			// from State s join s.district d
+			var join = root.join("district", JoinType.INNER);
+			
+			// lower(d.name) like :name
+			return criteriaBuilder.like(criteriaBuilder.lower(join.get("name")), name.toLowerCase().concat("%"));
+		};
+			
+		return stateRepo.findAll(spec);
+	}
+	
 
 }
