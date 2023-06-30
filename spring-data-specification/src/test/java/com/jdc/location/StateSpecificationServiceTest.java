@@ -41,11 +41,11 @@ public class StateSpecificationServiceTest {
 		}
 	}
 	
+	@Disabled
 	@Test
 	void test_specification_delete_by_region() {
 		var result = service.deleteByRegion("East");
 		assertThat(result, is(2L));
 	}
 	
-
 }

@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.location.dto.StateDto;
 import com.jdc.location.entity.District;
+import com.jdc.location.entity.District_;
 import com.jdc.location.entity.State;
+import com.jdc.location.entity.State_;
 import com.jdc.location.repo.DistrictRepo;
 import com.jdc.location.repo.StateRepo;
 
@@ -72,6 +74,19 @@ public class StateSpecificationService {
 			return criteriaBuilder.like(criteriaBuilder.lower(join.get("name")), name.toLowerCase().concat("%"));
 		};
 			
+		return stateRepo.findAll(spec);
+	}
+	
+	// find State using District name like
+	public List<State> findByDistrictNameLikeModelGen(String name) {
+		Specification<State> spec = (root, query, criteriaBuilder) -> {
+			// from State s join s.district d
+			var join = root.join(State_.district, JoinType.INNER);
+			
+			// lower(d.name) like :name
+			return criteriaBuilder.like(criteriaBuilder.lower(join.get(District_.name)), name.toLowerCase().concat("%"));
+		};
+		
 		return stateRepo.findAll(spec);
 	}
 	
