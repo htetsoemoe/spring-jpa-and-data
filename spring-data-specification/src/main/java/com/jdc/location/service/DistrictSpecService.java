@@ -1,10 +1,12 @@
 package com.jdc.location.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.jdc.location.entity.District;
 import com.jdc.location.entity.District_;
@@ -16,6 +18,25 @@ public class DistrictSpecService {
 
 	@Autowired
 	private DistrictRepo repo;
+		
+	// This Dynamic Search Query suitable for Production
+	public List<District> search(String region, Integer stateId, String name) {
+		List<Specification<District>> list = new ArrayList<>();
+		
+		if (StringUtils.hasLength(region)) {
+			list.add((root, query, cb) -> cb.equal(root.get(District_.state).get(State_.region), region));
+		}
+		
+		if (null != stateId && stateId > 0) {
+			list.add((root, query, cb) -> cb.equal(root.get(District_.state).get(State_.id), stateId));
+		}
+		
+		if (StringUtils.hasLength(name)) {
+			list.add((root, query, cb) -> cb.like(cb.lower(root.get(District_.name)), name.toLowerCase().concat("%")));
+		}
+			
+		return repo.findAll(Specification.allOf(list));
+	}
 	
 	public List<District> search(String keyword) {
 		/*
